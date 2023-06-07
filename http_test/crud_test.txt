@@ -1,0 +1,16 @@
+// httpie is installed using Python ...
+
+// get students
+http GET http://localhost:8080/api/v1/students
+
+// create new student
+http POST http://localhost:8080/api/v1/students \
+name=Jorge \
+email=barizonte@gmail.com \
+gender=MALE
+
+// update student
+http PUT http://localhost:8080/api/v1/students/1?name=Alex
+
+// delete student
+http DELETE http://localhost:8080/api/v1/students/1
