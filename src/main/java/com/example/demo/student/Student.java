@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @ToString
 @Getter
@@ -41,5 +42,13 @@ public class Student {
         this.name = name;
         this.email = email;
         this.gender = gender;
+    }
+
+    public boolean isValidName(String name) {
+        return name != null && name.trim().length() > 0 && !Objects.equals(this.getName(), name);
+    }
+
+    public boolean isValidEmail(String email) {
+        return email != null && email.trim().length() > 0 && !Objects.equals(this.getEmail(), email);
     }
 }

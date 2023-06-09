@@ -27,7 +27,7 @@ public class StudentService {
                 .selectExistsEmail(student.getEmail());
         if (existsEmail) {
             throw new BadRequestException(
-                    "Email " + student.getEmail() + " taken");
+                    "Email [" + student.getEmail() + "] is taken");
         }
 
         studentRepository.save(student);
@@ -44,17 +44,17 @@ public class StudentService {
     @Transactional
     public void updateStudent(Long studentId, String name, String email) {
         Student student = studentRepository.findById(studentId).orElseThrow(
-                () -> new IllegalStateException("student with id " + studentId + "does not exist")
+                () -> new IllegalStateException("student with id [" + studentId + "] does not exist")
         );
 
-        if (name != null && name.length() > 0 && !Objects.equals(student.getName(), name)) {
+        if (student.isValidName(name)) {
             student.setName(name);
         }
 
-        if (email != null && email.length() > 0 && !Objects.equals(student.getEmail(), email)) {
+        if (student.isValidEmail(email)) {
             Optional<Student> studentOptional = studentRepository.findStudentByEmail(email);
             if(studentOptional.isPresent()) {
-                throw new IllegalStateException(email + " is taken");
+                throw new IllegalStateException("[" + email + "] is taken");
             }
             student.setEmail(email);
         }

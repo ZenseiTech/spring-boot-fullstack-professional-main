@@ -9,8 +9,13 @@ name=Jorge \
 email=barizonte@gmail.com \
 gender=MALE
 
+http POST http://localhost:8080/api/v1/students \
+name=Alex \
+email=alex@gmail.com \
+gender=MALE
+
 // update student
-http PUT http://localhost:8080/api/v1/students/1?name=Alex
+http PUT http://localhost:8080/api/v1/students/1 name==Alex email==alexbarizonte@gmail.com
 
 // delete student
 http DELETE http://localhost:8080/api/v1/students/1
